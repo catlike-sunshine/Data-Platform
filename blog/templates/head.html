@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>*****D  A  T  A*****</title>
+  <!-- Loading Bootstrap -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link href="{% static 'css/semantic.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/header.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/icon.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/item.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/image.min.css' %}" rel="stylesheet">
+  <!--<link href="{% static 'css/dashboard.css' %}" rel = "stylesheet">-->
+  <link href="{% static 'css/datatables.css' %}" rel = "stylesheet">
+  <!-- Bootstrap -->
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+  -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script type="text/javascript" src="{% static 'js/semantic.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/datatables.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/transition.js"></script>
+  <script type="text/javascript" src="{% static 'js/dropdown.js"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/dataTables.scroller.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style type="text/css">
+    body {
+      background-color: #FFFFFF;
+    }
+    .ui.menu .item img.logo {
+      margin-right: 1.5em;
+    }
+    .main.container {
+      margin-top: 7em;
+    }
+    .wireframe {
+      margin-top: 2em;
+    }
+    .ui.footer.segment {
+      margin: 5em 0em 0em;
+      padding: 5em 0em;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui fixed primary inverted menu">
+    <div class="ui container">
+      <a href="{% url 'blog:index' %}" class="header item">
+        <img class="logo" src="{% static 'logo.png' %}">
+          个人项目
+      </a>
+      <a href="{% url 'blog:accident_list' %}" class="item">数据表</a>
+    </div>
+  </div>
+</body>

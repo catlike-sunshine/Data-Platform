@@ -1,0 +1,23 @@
+{% load static %}
+{% include "head.html" %}
+
+<div class="ui main text container">
+  <div>
+  <h3 class="ui header">
+    文章列表
+  </h3>
+  {% for article in article_list %}
+  <div class="blog-post">
+    <h2>
+      <a class="text-dark" href="{% url 'blog:detail' article.id %}">{{article.title}}</a>
+    </h2>
+    <hr>
+    <div>
+      <p>{{ article.content | striptags |truncatewords:20}}</p>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+
+{% include "foot.html" %}

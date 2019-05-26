@@ -1,0 +1,23 @@
+{% include "head.html" %}
+      <div class="container bs-docs-container">
+        <div class="demo-headline">
+          <h1 class="demo-logo">
+            <div class="logo"></div>
+            Thelalasis
+            <small>马彪的个人主页</small>
+          </h1>
+        </div> <!-- /demo-headline -->
+
+        <!-- Static navbar -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <form action="/search" method="post">
+            {% csrf_token %}
+            <input type="text" name="q">
+            <input type="submit" value="搜索">
+          </form>
+          <p>{{rlt}}</p>
+          <p>{{ttt}}</p>
+        </div>
+      </div> <!-- /container -->
+{% include "foot.html" %}

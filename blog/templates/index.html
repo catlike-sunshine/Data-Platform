@@ -1,0 +1,19 @@
+{% load static %}
+{% include "head.html" %}
+    <div class="ui main container">
+      <div class="ui grid">
+            <div class="two wide column">
+              <h1 class="header">
+                Hello! World!
+              </h1>
+                <p>现在是:{{ text.nowtime | date }}</p>
+                <p>欢迎...</p>
+                <button class = "ui blue button" onclick="location.href='{% url 'blog:accident_list' %}'" type = "button">了解更多</button>
+            </div>
+            <div class="eight wide column">
+              <img src="{% static 'img/IMG_0078.jpg' %}" class="img-fluid" alt="Responsive image">
+            </div>
+      </div>
+        <p><strong class="Afghanistan flag"> </strong></p>
+    </div>
+{% include "foot.html" %}
