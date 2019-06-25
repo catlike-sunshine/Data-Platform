@@ -11,6 +11,7 @@ import datetime
 from blog.models import article
 from blog.models import accident
 from blog.models import comment
+from blog.models import terms
 
 # from blog.forms import commentForm
 
@@ -61,7 +62,7 @@ class get_comments(ListView):
 	paginate_by = 10
 	# 筛选目标文章的评论，article_id为url中的参数
 	def get_queryset(self):
-		return post.comment.filter()
+		return article.comment.filter()
     #def get_context_data(self, **kwargs):
     #    context = super().get_body_data(**kwargs)
     #    context['form'] = commentForm()
@@ -80,3 +81,14 @@ class get_comments(ListView):
         #context['comment_list'] = zip(range(first_num, last_num, -1), context['comment_list'])
 
 		#return context
+
+class get_terms_list(ListView):
+	model = terms
+	template_name = "terms_list.html"
+	content_object_name =  "terms_list"
+
+class get_terms_detail(DetailView):
+	template_name = "term.html"
+	model = terms
+	context_object_name = "term"
+	pk_url_kwarg = 'terms_id'

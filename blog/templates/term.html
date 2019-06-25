@@ -1,0 +1,20 @@
+{% load static %}
+{% include "head.html" %}
+
+<div class="ui main text container">
+  <div class = "ui item">
+    <h2 class="ui header">
+      <div class="column"><i class="book icon"></i>{{term.title}}</div>
+    </h2>
+    <div class="ui divider"></div>
+    <div class="ui inverted">
+      <button class="ui inverted red button">{{term.acmodels}}</button>
+    </div>
+    <p>
+    {{term.content | safe}}
+    </p>
+  </div>
+</div>
+<!--{% include "comment/article_comment.html"%}-->
+
+{% include "foot.html" %}
