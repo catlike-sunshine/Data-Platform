@@ -6,13 +6,18 @@
     <h2 class="ui header">
       <div class="column"><i class="book icon"></i>{{term.title}}</div>
     </h2>
+    {% for tag in term.tags.all %}
+      <a class="ui teal tag label">{{tag}}</a>
+    {% endfor %}
     <div class="ui divider"></div>
-    <div class="ui inverted">
+    <div class="ui raised very padded text container segment">
+      <h3>词条来源型号</h3>
       <button class="ui inverted red button">{{term.acmodels}}</button>
     </div>
-    <p>
-    {{term.content | safe}}
-    </p>
+    <div class="ui raised very padded text container segment">
+      <h3>词条解释</h3>
+      <p>{{term.content | safe}}</p>
+    </div>
   </div>
 </div>
 <!--{% include "comment/article_comment.html"%}-->

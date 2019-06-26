@@ -31,7 +31,7 @@ class article_Admin(admin.ModelAdmin):
 
 @admin.register(terms)
 class terms_Admin(admin.ModelAdmin):
-    list_display = ('title','content', 'acmodels')
+    list_display = ('title', 'content', 'acmodels', 'tags')
     list_filter = ('title',)
     search_fields = ('title',)
 # Register your models here.

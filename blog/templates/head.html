@@ -51,6 +51,11 @@
       margin: 5em 0em 0em;
       padding: 5em 0em;
     }
+    .ui.container > h1 {
+      font-size: 3em;
+      text-align: center;
+      font-weight: normal;
+    }
   </style>
 </head>
 <body>
@@ -58,9 +63,10 @@
     <div class="ui container">
       <a href="{% url 'blog:index' %}" class="header item">
         <img class="logo" src="{% static 'logo.png' %}">
-          个人项目
+          特性Big Data
       </a>
-      <a href="{% url 'blog:accident_list' %}" class="item">数据表</a>
+      <a href="{% url 'blog:accident_list' %}" class="item">事故事件</a>
+      <a href="{% url 'blog:trems_list' %}" class="item">术语定义</a>
     </div>
   </div>
 </body>
