@@ -2,6 +2,6 @@
 
 ## 1. 项目描述
 ### 库
-`django``django-taggit`
+`django` `django-taggit`
 
 ## 2. 协同工作
