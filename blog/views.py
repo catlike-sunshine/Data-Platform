@@ -9,10 +9,7 @@ from django.views.generic.detail import DetailView
 import datetime
 
 from blog.models import accident
-<<<<<<< HEAD
-=======
 from blog.models import terms
->>>>>>> b62a42baaa96e7f09ee92cbe27dc5d71a0eda923
 
 # from blog.forms import commentForm
 
@@ -32,9 +29,6 @@ class get_accident_list(ListView):
 	content_object_name =  "accident_list"
 
 
-<<<<<<< HEAD
-
-
 class get_terms_list(ListView):
 	model = terms
 	template_name = "terms_list.html"
@@ -45,4 +39,4 @@ class get_terms_detail(DetailView):
 	model = terms
 	context_object_name = "term"
 	pk_url_kwarg = 'terms_id'
->>>>>>> b62a42baaa96e7f09ee92cbe27dc5d71a0eda923
+
