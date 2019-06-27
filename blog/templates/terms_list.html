@@ -1,0 +1,106 @@
+{% load static %}
+{% include "head.html" %}
+
+<div class="ui main container">
+    <div class="ui secondary menu">
+      <h2 class="ui header">事故调查表</h2>
+      <div class="right menu">
+        <div class="item">
+          <div class="ui left input">
+            <input type="text" placeholder="Search">
+            <button class="ui button">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui bottom attached segment pushable">
+      <div class="ui visible inverted left vertical sidebar menu">
+        <a class="item">
+            <img class="ui avatar image" src="{% static 'images/icons/imac.svg' %}">
+          &#8195;&#8194;监控面板
+        </a>
+        <a class="item">
+            <img class="ui avatar image" src="{% static 'images/icons/clipboard.svg' %}">
+          &#8195;&#8194;问题管理
+        </a>
+        <div class="item">
+            <img class="ui avatar image" src="{% static 'images/icons/goal.svg' %}">
+              &#8195;&#8194;我的任务
+            <div class="menu">
+                  <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;待处理的任务</a>
+                  <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;已处理的任务</a>
+            </div>
+        </div>
+      </div>
+      <div class="pusher">
+        <div class="ui basic segment">
+            <button class="ui new blue button">
+                <span style="font-size: 1em; color: white;">
+                  <i class="fas fa-edit"></i>
+                </span>
+              &#8194;新建
+            </button>
+            <button class="ui renewal button">
+                <span style="font-size: 1em; color: white;">
+                    <i class="fas fa-redo"></i>
+                </span>
+              &#8194;刷新
+            </button>
+            <button class="ui download button">
+                <span style="font-size: 1em; color: white;">
+                    <i class="fas fa-angle-double-down"></i>
+                </span>
+              &#8194;下载
+            </button>
+          <table id="event" class="ui striped table">
+              <thead>
+              <tr>
+                <th>术语</th>
+                <th>适用机型</th>
+                <th>术语说明</th>
+              </tr>
+              </thead>
+          {% for terms in terms_list %}
+              <tr>
+                <td><a class="text-dark" href="{% url 'blog:terms_detail' terms.id %}">{{terms.title}}</a></td>
+                <td>{{terms.acmodels}}</td>
+                <td>{{terms.content | striptags |truncatewords:20}}</td>
+              </tr>
+          {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>    
+    <script type="text/javascript">
+    function filterGlobal () {
+    $('#example').DataTable().search(
+        $('#global_filter').val(),
+        $('#global_regex').prop('checked'),
+        $('#global_smart').prop('checked')
+    ).draw();
+}
+ 
+    function filterColumn ( i ) {
+    $('#example').DataTable().column( i ).search(
+        $('#col'+i+'_filter').val(),
+        $('#col'+i+'_regex').prop('checked'),
+        $('#col'+i+'_smart').prop('checked')
+    ).draw();
+}
+    $(document).ready(function() {
+       $('#event').DataTable({
+           'scrollX':true,
+           'scrollY':200,
+           searching: true,
+       });
+       $('input.global_filter').on( 'keyup click', function () {
+        filterGlobal();
+    } );
+ 
+       $('input.column_filter').on( 'keyup click', function () {
+        filterColumn( $(this).parents('tr').attr('data-column') );
+    } );});
+    </script>
+    <!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->
+</div>
+{% include "foot.html" %}
