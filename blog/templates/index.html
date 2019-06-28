@@ -1,78 +1,76 @@
 {% load static %}
 {% include "head.html" %}
-    <div class="ui main container">
-      <h1>特性工程大数据平台</h1>
-      <div class="ui text container">
-        <p>特性工程大数据平台提供特性工程各专业在型号研制全寿命周期中的数据基础.</p>
-        <p>现在是:{{ text.nowtime | date }}</p>
-        <p>欢迎...</p>
-        <button class = "ui blue button" onclick="location.href='{% url 'blog:accident_list' %}'" type = "button">了解更多</button>
-      </div>
-      <div class="ui raised very padded grid center">
-        <div class="two wide column">  
-        </div>
-        <div class="four wide column">
-          <div class="ui raised card">
-            <div class="content">
-              <div class="header"><a href="{% url 'blog:accident_list' %}" class="item">事故事件</a></div>
-              <div class="ui test container">相似机型运营数据, 事故事件数据, 及其他参考数据资料</div>
-              <div class="meta">
-                <span class="category">Animals</span>
-              </div>
-              <div class="description">
-                <p></p>
-              </div>
-            </div>
-            <div class="extra content">
-              <div class="right floated author">
-                <img class="ui avatar image" src="../images/avatar/small/matt.jpg"> Matt
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui raised card">
-              <div class="content">
-                <div class="header">型号设计</div>
-                <div class="ui test container">型号设计数据</div>
-                <div class="meta">
-                  <span class="category">Animals</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-              </div>
-              <div class="extra content">
-                <div class="right floated author">
-                  <img class="ui avatar image" src="../images/avatar/small/matt.jpg"> Matt
-                </div>
-              </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui raised card">
-            <div class="content">
-              <div class="header"><a href="{% url 'blog:trems_list' %}" class="item">术语定义</a></div>
-              <div class="ui test container">型号常用术语, 定义, 缩略语</div>
-              <div class="meta">
-                <span class="category">Animals</span>
-              </div>
-              <div class="description">
-                <p></p>
-              </div>
-            </div>
-            <div class="extra content">
-              <div class="right floated author">
-                <img class="ui avatar image" src="../images/avatar/small/matt.jpg"> Matt
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="two wide column">  
-        </div>
-      </div>
-        <p><strong class="Afghanistan flag"> </strong></p>
+  <div class="ui main container">
+    <h1>特性工程大数据平台</h1>
+    <div class="ui text container">
+      <p>特性工程大数据平台提供特性工程各专业在型号研制全寿命周期中的数据基础.</p>
+      <p>现在是: {{ text.nowtime | date }} </p>
+      <p>欢迎...</p>
+      <button class = "ui blue button" onclick="location.href='{% url 'blog:accident_list' %}'" type = "button">了解更多</button>
     </div>
+    <div class="ui raised very padded grid center">
+      <div class="two wide column"></div>
+      <div class="four wide column">
+        <div class="ui raised card">
+          <div class="content">
+            <div class="header"><a href="{% url 'blog:accident_list' %}" class="item">事故事件</a></div>
+            <div class="ui test container">相似机型运营数据, 事故事件数据, 及其他参考数据资料</div>
+            <div class="meta">
+              <span class="category">SIA</span>
+            </div>
+            <div class="description">
+              <p></p>
+            </div>
+          </div>
+          <div class="extra content">
+            <div class="right floated author">
+              <img class="ui avatar image" src="{% static 'images/login/icon.png' %}"> SIA
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="four wide column">
+        <div class="ui raised card">
+            <div class="content">
+              <div class="header">型号设计</div>
+              <div class="ui test container">型号设计数据<br/><br/></div>
+              <div class="meta">
+                <span class="category">SIA</span>
+              </div>
+              <div class="description">
+                <p></p>
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="right floated author">
+                <img class="ui avatar image" src="{% static 'images/login/icon.png' %}"> SIA
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="four wide column">
+        <div class="ui raised card">
+          <div class="content">
+            <div class="header"><a href="{% url 'blog:trems_list' %}" class="item">术语定义</a></div>
+            <div class="ui test container">型号常用术语, 定义, 缩略语<br/><br/></div>
+            <div class="meta">
+              <span class="category">SIA</span>
+            </div>
+            <div class="description">
+              <p></p>
+            </div>
+          </div>
+          <div class="extra content">
+            <div class="right floated author">
+              <img class="ui avatar image" src="{% static 'images/login/icon.png' %}"> SIA
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="two wide column"></div>
+    </div>
+    <p><strong class="Afghanistan flag"> </strong></p>
+  </div>
 {% include "foot.html" %}
 <!--以下是只在本页面中适用的css和js等内容-->
 <style type="text/css">

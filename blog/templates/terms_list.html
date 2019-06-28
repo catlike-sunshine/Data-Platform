@@ -67,36 +67,38 @@
         </div>
       </div>
     </div>    
-    <script type="text/javascript">
-    function filterGlobal () {
-    $('#example').DataTable().search(
-        $('#global_filter').val(),
-        $('#global_regex').prop('checked'),
-        $('#global_smart').prop('checked')
-    ).draw();
-}
- 
-    function filterColumn ( i ) {
-    $('#example').DataTable().column( i ).search(
-        $('#col'+i+'_filter').val(),
-        $('#col'+i+'_regex').prop('checked'),
-        $('#col'+i+'_smart').prop('checked')
-    ).draw();
-}
-    $(document).ready(function() {
-       $('#event').DataTable({
-           'scrollX':true,
-           'scrollY':200,
-           searching: true,
-       });
-       $('input.global_filter').on( 'keyup click', function () {
-        filterGlobal();
-    } );
- 
-       $('input.column_filter').on( 'keyup click', function () {
-        filterColumn( $(this).parents('tr').attr('data-column') );
-    } );});
-    </script>
-    <!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->
 </div>
 {% include "foot.html" %}
+<!--以下是本页适用的脚本-->
+<script type="text/javascript">
+  function filterGlobal () {
+  $('#example').DataTable().search(
+      $('#global_filter').val(),
+      $('#global_regex').prop('checked'),
+      $('#global_smart').prop('checked')
+  ).draw();
+  }
+
+  function filterColumn ( i ) {
+  $('#example').DataTable().column( i ).search(
+      $('#col'+i+'_filter').val(),
+      $('#col'+i+'_regex').prop('checked'),
+      $('#col'+i+'_smart').prop('checked')
+  ).draw();
+  }
+  $(document).ready(function() {
+     $('#event').DataTable({
+         'scrollX':true,
+         'scrollY':200,
+         searching: true,
+     });
+     $('input.global_filter').on( 'keyup click', function () {
+      filterGlobal();
+    } );
+
+     $('input.column_filter').on( 'keyup click', function () {
+      filterColumn( $(this).parents('tr').attr('data-column') );
+    } );});
+  </script>
+  <!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->
+
