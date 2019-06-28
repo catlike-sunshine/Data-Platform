@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 #import markdown
 import datetime
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from blog.models import article
 from blog.models import accident
@@ -46,7 +47,7 @@ class get_article_list(ListView):
 	#		obj.content = markdown.markdown(obj.content,)
 	#	return (article_list)
 
-class get_accident_list(ListView):
+class get_accident_list(LoginRequiredMixin,ListView):
 	model = accident
 	template_name = "accident_list.html"
 	content_object_name =  "accident_list"
@@ -82,12 +83,12 @@ class get_comments(ListView):
 
 		#return context
 
-class get_terms_list(ListView):
+class get_terms_list(LoginRequiredMixin,ListView):
 	model = terms
 	template_name = "terms_list.html"
 	content_object_name =  "terms_list"
 
-class get_terms_detail(DetailView):
+class get_terms_detail(LoginRequiredMixin,DetailView):
 	template_name = "term.html"
 	model = terms
 	context_object_name = "term"

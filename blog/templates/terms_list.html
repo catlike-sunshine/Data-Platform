@@ -56,18 +56,134 @@
                 <th>术语说明</th>
               </tr>
               </thead>
-          {% for terms in terms_list %}
+             
+              <tfoot>
               <tr>
-                <td><a class="text-dark" href="{% url 'blog:terms_detail' terms.id %}">{{terms.title}}</a></td>
-                <td>{{terms.acmodels}}</td>
-                <td>{{terms.content | striptags |truncatewords:20}}</td>
+                <th>术语</th>
+                <th>适用机型</th>
+                <th>术语说明</th>
               </tr>
-          {% endfor %}
+              </tfoot>
+              
+              <tbody>
+                  {% for terms in terms_list %}
+                      <tr>
+                        <td><a class="text-dark" href="{% url 'blog:terms_detail' terms.id %}">{{terms.title}}</a></td>
+                        <td>{{terms.acmodels}}</td>
+                        <td>{{terms.content | striptags |truncatewords:20}}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+
           </table>
+            
+          <p>
+            <button id="addRow">添加行</button>
+            <button id="delRow">删除选中的行</button>
+          </p>
+        
         </div>
       </div>
     </div>    
 </div>
+
+    <!--引入Javascript / CSS （CDN）/DataTable-->
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>  
+
+    <!--增删行列-->
+    <!--增加行-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var table = $('#event').DataTable(); 
+        i = table.rows.length;//或i=0;
+        i++;//i指数据库的数据条数
+        $('#addRow').on('click', function(){
+            table.row.add([
+            '<td><input type="Text" id="txt1' + i + '"/></td>',
+            '<td><input type="Text" id="txt2' + i + '"/></td>',
+            '<td><input type="Text" id="txt3' + i + '"/></td>'
+            ]).draw();
+        });
+      });
+   </script>
+        
+    <!--删除行-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var table = $('#event').DataTable(); 
+        $('#event tbody').on('click','tr', function(){
+            if ($(this).hasClass('selected')){
+                $(this).removeClass('selected');
+            }
+            else{
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        $('#delRow').click(function(){
+            table.row('.selected').remove().draw(false);
+        });
+      });
+    </script>
+    
+    <!--分列查找内容-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Setup - add a text input to each footer cell
+            $('#event tfoot th').each( function () {
+                var title = $('#event thead th').eq( $(this).index() ).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            });
+
+            // DataTable
+            var table = $('#event').DataTable();
+
+            // Apply the search
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+                    table.column( colIdx ).search( this.value ).draw();
+                });
+            });
+        });
+    </script>
+    <!--内嵌css代码-->
+    <style type='text/css'>
+        tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+        }
+    </style>
+    
+    <!--高亮鼠标停留的行和列-->
+    <script type="text/javascript">   
+        $(document).ready(function() {
+            var lastIdx = null;
+            var table = $('#event').DataTable();
+            $('#event tbody')
+                .on( 'mouseover', 'td', function () {
+                    var colIdx = table.cell(this).index().column;
+                    if ( colIdx !== lastIdx ) {
+                        $( table.cells().nodes() ).removeClass( 'highlight' );
+                        $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                    }
+                } )
+                .on( 'mouseleave', function () {
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                } );
+        } );
+    </script>
+    <style type="text/css">
+        td.highlight {
+            background-color: yellow!important;
+        }
+    </style>
+
 {% include "foot.html" %}
 <!--以下是本页适用的脚本-->
 <script type="text/javascript">
