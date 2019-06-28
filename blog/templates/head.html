@@ -14,6 +14,7 @@
   <link href="{% static 'css/icon.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/item.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/image.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/icon.min.css' %}" rel="stylesheet">
   <!--<link href="{% static 'css/dashboard.css' %}" rel = "stylesheet">-->
   <link href="{% static 'css/datatables.css' %}" rel = "stylesheet">
   <!-- Bootstrap -->
@@ -59,7 +60,7 @@
   </style>
 </head>
 <body>
-  <div class="ui fixed primary inverted menu">
+  <div class="ui fixed primary menu">
     <div class="ui container">
       <a href="{% url 'blog:index' %}" class="header item">
         <img class="logo" src="{% static 'logo.png' %}">
@@ -68,5 +69,8 @@
       <a href="{% url 'blog:accident_list' %}" class="item">事故事件</a>
       <a href="{% url 'blog:trems_list' %}" class="item">术语定义</a>
     </div>
+    <div class="ui action icon input">
+      <input type="text" placeholder="搜索...">
+      <i class="inverted circular search link icon"></i>
+    </div>
   </div>
-</body>
