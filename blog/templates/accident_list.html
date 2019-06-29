@@ -1,39 +1,39 @@
 {% load static %}
 {% include "head.html" %}
 
-<div class="ui main container">
-    <div class="ui secondary menu">
-      <h2 class="ui header">事故调查表</h2>
-      <div class="right menu">
-        <div class="item">
-          <div class="ui left input">
-            <input type="text" placeholder="Search">
-            <button class="ui button">Submit</button>
-          </div>
+<div class="ui sidebar inverted vertical menu">
+    <a class="item" href="test2.html">
+        <img class="ui avatar image" src="{% static 'images/icons/imac.svg' %}">
+    &#8195;&#8194;监控面板
+    </a>
+    <a class="item">
+        <img class="ui avatar image" src="{% static 'images/icons/clipboard.svg' %}">
+      &#8195;&#8194;问题管理
+    </a>
+    <div class="item">
+        <img class="ui avatar image" src="{% static 'images/icons/goal.svg' %}">
+          &#8195;&#8194;我的任务
+        <div class="menu">
+              <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;待处理的任务</a>
+              <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;已处理的任务</a>
         </div>
-      </div>
     </div>
-    <div class="ui bottom attached segment pushable">
-      <div class="ui visible inverted left vertical sidebar menu">
-        <a class="item">
-            <img class="ui avatar image" src="{% static 'images/icons/imac.svg' %}">
-          &#8195;&#8194;监控面板
-        </a>
-        <a class="item">
-            <img class="ui avatar image" src="{% static 'images/icons/clipboard.svg' %}">
-          &#8195;&#8194;问题管理
-        </a>
-        <div class="item">
-            <img class="ui avatar image" src="{% static 'images/icons/goal.svg' %}">
-              &#8195;&#8194;我的任务
-            <div class="menu">
-                  <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;待处理的任务</a>
-                  <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;已处理的任务</a>
-            </div>
+</div>
+
+<div class="ui main container">
+    <div class="column">
+        <div class="pusher">
+           <div class="ui container">
+           <div class="ui labeled icon button">
+            <i class = "sidebar icon"></i>
+            Menu
+           </div>
+           </div>
         </div>
-      </div>
-      <div class="pusher">
-        <div class="ui basic segment">
+            <div class="right item">
+                <h3 class = "header">事故调查表</h3>
+            </div>
+        <div class="ui basic segment pushable">
             <button class="ui new blue button">
                 <span style="font-size: 1em; color: white;">
                   <i class="fas fa-edit"></i>
@@ -61,7 +61,7 @@
                 <th>详细情况</th>
               </tr>
               </thead>
-              
+
               <tfoot>
                 <tr>
                   <th>事件名称</th>
@@ -81,17 +81,17 @@
                  </tr>
                {% endfor %}
               </tbody>
-          
+
           </table>
-          
+
           <p>
             <button id="addRow">添加行</button>
             <button id="delRow">删除选中的行</button>
           </p>
-        
+
         </div>
-      </div>
-    </div>  
+    </div>
+</div> 
     
     <!--引入Javascript / CSS （CDN）/DataTable-->
 <!--     DataTables CSS -->
@@ -225,3 +225,12 @@
     <!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->
 </div>
 {% include "foot.html" %}
+
+<script type="text/javascript">
+    $('.ui.button').click(function(){
+
+        $('.ui.sidebar').sidebar('toggle');
+    });
+
+</script>
+<!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->
