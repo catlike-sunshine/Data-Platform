@@ -6,10 +6,6 @@
       <h2 class="ui header">事故调查表</h2>
       <div class="right menu">
         <div class="item">
-          <div class="ui left input">
-            <input type="text" placeholder="Search">
-            <button class="ui button">Submit</button>
-          </div>
         </div>
       </div>
     </div>
@@ -60,47 +56,155 @@
                 <th>术语说明</th>
               </tr>
               </thead>
-          {% for terms in terms_list %}
+              <tfoot>
               <tr>
-                <td><a class="text-dark" href="{% url 'blog:terms_detail' terms.id %}">{{terms.title}}</a></td>
-                <td>{{terms.acmodels}}</td>
-                <td>{{terms.content | striptags |truncatewords:20}}</td>
+                <th>术语</th>
+                <th>适用机型</th>
+                <th>术语说明</th>
               </tr>
-          {% endfor %}
+              </tfoot>
+              
+              <tbody>
+                  {% for terms in terms_list %}
+                      <tr>
+                        <td><a class="text-dark" href="{% url 'blog:terms_detail' terms.id %}">{{terms.title}}</a></td>
+                        <td>{{terms.acmodels}}</td>
+                        <td>{{terms.content | striptags |truncatewords:20}}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+
           </table>
+            
+          <p>
+            <button id="addRow">添加行</button>
+            <button id="delRow">删除选中的行</button>
+          </p>
+        
         </div>
       </div>
     </div>    
-    <script type="text/javascript">
-    function filterGlobal () {
-    $('#example').DataTable().search(
-        $('#global_filter').val(),
-        $('#global_regex').prop('checked'),
-        $('#global_smart').prop('checked')
-    ).draw();
-}
- 
-    function filterColumn ( i ) {
-    $('#example').DataTable().column( i ).search(
-        $('#col'+i+'_filter').val(),
-        $('#col'+i+'_regex').prop('checked'),
-        $('#col'+i+'_smart').prop('checked')
-    ).draw();
-}
-    $(document).ready(function() {
-       $('#event').DataTable({
-           'scrollX':true,
-           'scrollY':200,
-           searching: true,
-       });
-       $('input.global_filter').on( 'keyup click', function () {
-        filterGlobal();
-    } );
- 
-       $('input.column_filter').on( 'keyup click', function () {
-        filterColumn( $(this).parents('tr').attr('data-column') );
-    } );});
-    </script>
-    <!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->
 </div>
+
+    <!--增删行列-->
+    <!--增加行-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var table = $('#event').DataTable(); 
+        i = table.rows.length;//或i=0;
+        i++;//i指数据库的数据条数
+        $('#addRow').on('click', function(){
+            table.row.add([
+            '<td><input type="Text" id="txt1' + i + '"/></td>',
+            '<td><input type="Text" id="txt2' + i + '"/></td>',
+            '<td><input type="Text" id="txt3' + i + '"/></td>'
+            ]).draw();
+        });
+      });
+   </script>
+        
+    <!--删除行-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var table = $('#event').DataTable(); 
+        $('#event tbody').on('click','tr', function(){
+            if ($(this).hasClass('selected')){
+                $(this).removeClass('selected');
+            }
+            else{
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        $('#delRow').click(function(){
+            table.row('.selected').remove().draw(false);
+        });
+      });
+    </script>
+    
+    <!--分列查找内容-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Setup - add a text input to each footer cell
+            $('#event tfoot th').each( function () {
+                var title = $('#event thead th').eq( $(this).index() ).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            });
+
+            // DataTable
+            var table = $('#event').DataTable();
+
+            // Apply the search
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+                    table.column( colIdx ).search( this.value ).draw();
+                });
+            });
+        });
+    </script>
+    <!--内嵌css代码-->
+    <style type='text/css'>
+        tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+        }
+    </style>
+    
+    <!--高亮鼠标停留的行和列-->
+    <script type="text/javascript">   
+        $(document).ready(function() {
+            var lastIdx = null;
+            var table = $('#event').DataTable();
+            $('#event tbody')
+                .on( 'mouseover', 'td', function () {
+                    var colIdx = table.cell(this).index().column;
+                    if ( colIdx !== lastIdx ) {
+                        $( table.cells().nodes() ).removeClass( 'highlight' );
+                        $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                    }
+                } )
+                .on( 'mouseleave', function () {
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                } );
+        } );
+    </script>
+    <style type="text/css">
+        td.highlight {
+            background-color: yellow!important;
+        }
+    </style>
+
 {% include "foot.html" %}
+<!--以下是本页适用的脚本-->
+<script type="text/javascript">
+  function filterGlobal () {
+  $('#example').DataTable().search(
+      $('#global_filter').val(),
+      $('#global_regex').prop('checked'),
+      $('#global_smart').prop('checked')
+  ).draw();
+  }
+
+  function filterColumn ( i ) {
+  $('#example').DataTable().column( i ).search(
+      $('#col'+i+'_filter').val(),
+      $('#col'+i+'_regex').prop('checked'),
+      $('#col'+i+'_smart').prop('checked')
+  ).draw();
+  }
+  $(document).ready(function() {
+     $('#event').DataTable({
+         'scrollX':true,
+         'scrollY':200,
+         searching: true,
+     });
+     $('input.global_filter').on( 'keyup click', function () {
+      filterGlobal();
+    } );
+
+     $('input.column_filter').on( 'keyup click', function () {
+      filterColumn( $(this).parents('tr').attr('data-column') );
+    } );});
+  </script>
+  <!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->

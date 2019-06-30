@@ -1,71 +1,184 @@
 {% load static %}
 {% include "head.html" %}
 <body>
-     <div class="ui inverted left vertical sidebar menu">
-            <a class="item" href="test2.html">
-                <img class="ui avatar image" src="{% static 'images/icons/imac.svg' %}">
-              &#8195;&#8194;监控面板
-            </a>
-            <a class="item">
-                <img class="ui avatar image" src="{% static 'images/icons/clipboard.svg' %}">
-              &#8195;&#8194;问题管理
-            </a>
-            <div class="item">
-                <img class="ui avatar image" src="{% static 'images/icons/goal.svg' %}">
-                  &#8195;&#8194;我的任务
-                <div class="menu">
-                      <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;待处理的任务</a>
-                      <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;已处理的任务</a>
-                </div>
+<div class="ui sidebar inverted vertical menu">
+    <a class="item" href="test2.html">
+        <img class="ui avatar image" src="{% static 'images/icons/imac.svg' %}">
+    &#8195;&#8194;监控面板
+    </a>
+    <a class="item">
+        <img class="ui avatar image" src="{% static 'images/icons/clipboard.svg' %}">
+      &#8195;&#8194;问题管理
+    </a>
+    <div class="item">
+        <img class="ui avatar image" src="{% static 'images/icons/goal.svg' %}">
+          &#8195;&#8194;我的任务
+        <div class="menu">
+              <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;待处理的任务</a>
+              <a class="item">&#8195;&#8195;&#8195;&#8195;&#8195;已处理的任务</a>
+        </div>
+    </div>
+</div>
+
+<div class="ui main container">
+    <div class="column">
+        <div class="pusher">
+           <div class="ui container">
+           <div class="ui labeled icon button">
+            <i class = "sidebar icon"></i>
+            Menu
+           </div>
+           </div>
+        </div>
+            <div class="right item">
+                <h3 class = "header">事故调查表</h3>
             </div>
+        <div class="ui basic segment pushable">
+            <button class="ui new blue button">
+                <span style="font-size: 1em; color: white;">
+                  <i class="fas fa-edit"></i>
+                </span>
+              &#8194;新建
+            </button>
+            <button class="ui renewal button">
+                <span style="font-size: 1em; color: white;">
+                    <i class="fas fa-redo"></i>
+                </span>
+              &#8194;刷新
+            </button>
+            <button class="ui download button">
+                    <i class="angle double down icon"></i>
+              &#8194;下载
+            </button>
+          <table id="event" class="ui striped table">
+              <thead>
+              <tr>
+                <th>事件名称</th>
+                <th>发生时间</th>
+                <th>事故机型</th>
+                <th>详细情况</th>
+              </tr>
+              </thead>
+
+              <tfoot>
+                <tr>
+                  <th>事件名称</th>
+                  <th>发生时间</th>
+                  <th>事故机型</th>
+                  <th>详细情况</th>
+                </tr>
+              </tfoot>
+
+              <tbody>
+                {% for accident in accident_list %}
+                  <tr>
+                    <td>{{accident.title}}</td>
+                    <td>{{accident.date}}</td>
+                    <td>{{accident.acmodels}}</td>
+                    <td>{{accident.content}}</td>
+                 </tr>
+               {% endfor %}
+              </tbody>
+
+          </table>
+
+          <p>
+            <button id="addRow">添加行</button>
+            <button id="delRow">删除选中的行</button>
+          </p>
+
         </div>
-    <div style = "margin-top:35px;" class="ui one grid container">
-        <div class = "column">
-            <div class = "ui basic icon menu">
-                <a id = "toggle" class = "item">
-                    <i class = "sidebar icon"></i>
-                    Menu
-                </a>
-                <div class="right item">
-                    <h3 class = "header">事故调查表</h3>
-                </div>            
-            </div>  
-            <div class="ui bottom attached segment pushable">
-                <div class="ui basic segment">
-                    <button class="ui new blue button">
-                        <i class="file icon"></i>
-                      新建
-                    </button>
-                    <button class="ui renewal button">
-                        <i class="redo alternate icon"></i>
-                      刷新
-                    </button>
-                    <button class="ui download button">
-                        <i class="angle double down icon"></i>
-                      下载
-                    </button>
-                  <table id="event" class="ui striped table">
-                      <thead>
-                      <tr>
-                        <th>事件名称</th>
-                        <th>发生时间</th>
-                        <th>事故机型</th>
-                        <th>详细情况</th>
-                      </tr>
-                      </thead>
-                  {% for accident in accident_list %}
-                      <tr>
-                        <td>{{accident.title}}</td>
-                        <td>{{accident.date}}</td>
-                        <td>{{accident.acmodels}}</td>
-                        <td>{{accident.content}}</td>
-                      </tr>
-                  {% endfor %}
-                  </table>
-                </div>
-              </div>
-        </div>
-    </div>  
+    </div>
+</div> 
+    <!--增删行列-->
+    <!--增加行-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var table = $('#event').DataTable(); 
+        i = table.rows.length;//或i=0;
+        i++;//i指数据库的数据条数
+        $('#addRow').on('click', function(){
+            table.row.add([
+            '<td><input type="Text" id="txt1' + i + '"/></td>',
+            '<td><input type="Text" id="txt2' + i + '"/></td>',
+            '<td><input type="Text" id="txt3' + i + '"/></td>',
+            '<td><input type="Text" id="txt4' + i + '"/></td>'
+            ]).draw();
+        });
+      });
+    </script>
+        
+    <!--删除行-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var table = $('#event').DataTable(); 
+        $('#event tbody').on('click','tr', function(){
+            if ($(this).hasClass('selected')){
+                $(this).removeClass('selected');
+            }
+            else{
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        $('#delRow').click(function(){
+            table.row('.selected').remove().draw(false);
+        });
+      });
+    </script>
+    
+    <!--分列查找内容-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Setup - add a text input to each footer cell
+            $('#event tfoot th').each( function () {
+                var title = $('#event thead th').eq( $(this).index() ).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            });
+
+            // DataTable
+            var table = $('#event').DataTable();
+
+            // Apply the search
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+                    table.column( colIdx ).search( this.value ).draw();
+                });
+            });
+        });
+    </script>
+    <!--内嵌css代码-->
+    <style type='text/css'>
+        tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+        }
+    </style>
+    
+    <!--高亮鼠标停留的行和列-->
+    <script type="text/javascript">   
+        $(document).ready(function() {
+            var lastIdx = null;
+            var table = $('#event').DataTable();
+            $('#event tbody')
+                .on( 'mouseover', 'td', function () {
+                    var colIdx = table.cell(this).index().column;
+                    if ( colIdx !== lastIdx ) {
+                        $( table.cells().nodes() ).removeClass( 'highlight' );
+                        $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                    }
+                } )
+                .on( 'mouseleave', function () {
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                } );
+        } );
+    </script>
+    <style type="text/css">
+        td.highlight {
+            background-color: yellow!important;
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function() {
            $('#event').DataTable({
@@ -83,3 +196,12 @@
     <!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->
 </body>
 {% include "foot.html" %}
+
+<script type="text/javascript">
+    $('.ui.button').click(function(){
+
+        $('.ui.sidebar').sidebar('toggle');
+    });
+
+</script>
+<!-- 脚本部分用来处理表格样式等内容, 整个datatables用两个部分来控制, table部分控制数据和交互, script部分控制展试, 分页和搜索等功能-->

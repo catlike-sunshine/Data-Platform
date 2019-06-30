@@ -1,25 +1,34 @@
 {% load static %}
 {% include "head.html" %}
+  <div class="ui main text container"> 
+    <div class="ui grid">
+        <div class="four wide column left floated">
+            <div class="ui animated button" tabindex="0">
+              <div class="visible content">返回</div>
+              <div class="hidden content">
+                <a href="{% url 'blog:trems_list' %}"><i class="left arrow icon"></i></a>
+              </div>
+            </div>
+        </div>
+        <div class="eight wide column right floated">
+          <h2 class="ui header">
+            <div class="column"><i class="book icon"></i>{{term.title}}</div>
+          </h2>
+        </div>
+        <div class="ten wide column">
+            {% for tag in term.tags.all %}
+            <a class="ui teal tag label">{{tag}}</a>
+            {% endfor %}
+        </div>
+    </div> 
 
-<div class="ui main text container">
-  <div class = "ui item">
-    <h2 class="ui header">
-      <div class="column"><i class="book icon"></i>{{term.title}}</div>
-    </h2>
-    {% for tag in term.tags.all %}
-      <a class="ui teal tag label">{{tag}}</a>
-    {% endfor %}
     <div class="ui divider"></div>
     <div class="ui raised very padded text container segment">
-      <h3>词条来源型号</h3>
-      <button class="ui inverted red button">{{term.acmodels}}</button>
-    </div>
-    <div class="ui raised very padded text container segment">
-      <h3>词条解释</h3>
-      <p>{{term.content | safe}}</p>
+      <h3>相关型号</h3>
+  <div class="ui raised very padded text container segment">
+      <h3>词条来源</h3>
+      <p>{{term.source | safe}}</p>
     </div>
   </div>
-</div>
 <!--{% include "comment/article_comment.html"%}-->
-
 {% include "foot.html" %}

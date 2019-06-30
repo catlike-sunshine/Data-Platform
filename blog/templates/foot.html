@@ -1,12 +1,38 @@
 {% load static %}
 <html>
 <body>
-<div class="ui inverted footer segment">
-  <div class="ui center aligned container">
-    <div class="ui inverted section divider"></div>
-    <div style = "white-space:pre"><b>Copyright </b>© <b>2019-2022 中国商用飞机有限责任公司SIA工作组. </b>All rights reserved.</div>
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">关于</h4>
+          <div class="ui inverted link list">
+            <a href="{% url 'blog:index' %}" class="item">Sitemap</a>
+            <a href="{% url 'blog:index' %}" class="item">Contact Us</a>
+            <a href="{% url 'blog:index' %}" class="item">Religious Ceremonies</a>
+            <a href="{% url 'blog:index' %}" class="item">Gazebo Plans</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">服务</h4>
+          <div class="ui inverted link list">
+            <a href="{% url 'blog:index' %}" class="item">Banana Pre-Order</a>
+            <a href="{% url 'blog:index' %}" class="item">DNA FAQ</a>
+            <a href="{% url 'blog:index' %}" class="item">How To Access</a>
+            <a href="{% url 'blog:index' %}" class="item">Favorite X-Men</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">页脚</h4>
+          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ui center aligned container">
+      <div class="ui inverted section divider"></div>
+      <div style = "white-space:pre"><b>Copyright </b>© <b>2019-2022 中国商用飞机有限责任公司SIA工作组. </b>All rights reserved.</div>
+    </div>
   </div>
-</div>
   <!--[if lt IE 8]>
   <script src="js/icon-font-ie7.js"></script>
   <script src="js/icon-font-ie7-24.js"></script>

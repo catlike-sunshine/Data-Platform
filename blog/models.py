@@ -30,7 +30,6 @@ class accident(models.Model):
 
   def __str__(self):
     return (self.title)
-
 #术语定义部分内容
 class terms(models.Model):
     id = models.AutoField(primary_key = True)

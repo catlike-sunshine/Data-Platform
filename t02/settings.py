@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'taggit',
+    'employees.apps.EmployeesConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -114,6 +116,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+#表示登录或注销后都是跳转到blog页面（即自己设置的首页的路由地址）-zyl
+LOGIN_REDIRECT_URL="/blog/"
+LOGOUT_REDIRECT_URL="/blog/"
 
 
 # Static files (CSS, JavaScript, Images)
